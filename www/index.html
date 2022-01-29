@@ -24,8 +24,7 @@
                 <ons-icon icon="fa-coins"></ons-icon> </ons-tab>
             <ons-tab page="tab2.html" label="収入">
                 <ons-icon icon="fa-piggy-bank"></ons-icon> </ons-tab>
-            <!-- <ons-tab page="tab3.html" label="設定">
-                <ons-icon icon="fa-cog"></ons-icon> </ons-tab> -->
+
         </ons-tabbar>
     </ons-page>
     <!-- -===========================PAGE1============================== -->
@@ -52,7 +51,7 @@
         <ons-col><input type="date" name="today" id="date"/></ons-col>
     </ons-row>
     <!-- RADIO BTN -->
-  
+
 <ons-row>
 <ons-carousel  auto-refresh swipeable overscrollable item-width="70px">
 <ons-carousel-item>
@@ -97,39 +96,10 @@
             <ons-icon icon="fa-gamepad"></ons-icon><br>ゲーム</span>
         </label>
  </ons-carousel-item>
- 
+
 </ons-carousel>
 </ons-row>
 
-<!-- 
-    <ons-row  class="flex-space">
-        <label class="custom-radio-btn">
-            <input type="radio" name="category" value="0" checked>
-            <span class="checkmark">
-                <ons-icon icon="fa-utensils"></ons-icon><br>食事</span>
-        </label>
-        <label class="custom-radio-btn">
-            <input type="radio" name="category" value="1">
-            <span class="checkmark">
-                <ons-icon icon="fa-cocktail"></ons-icon><br>飲み物</span>
-        </label>
-        <label class="custom-radio-btn">
-        <input type="radio" name="category" value="2">
-        <span class="checkmark">
-            <ons-icon icon="fa-file-invoice-dollar"></ons-icon><br>生活</span>
-        </label>
-        <label class="custom-radio-btn">
-        <input type="radio" name="category" value="3">
-        <span class="checkmark">
-            <ons-icon icon="fa-calendar-alt"></ons-icon><br>活動</span>
-        </label>
-        <label class="custom-radio-btn">
-        <input type="radio" name="category" value="4">
-        <span class="checkmark">
-            <ons-icon icon="fa-bus"></ons-icon><br>交通</span>
-        </label>
-    </ons-row> 
--->
 
     <ons-row class="flex-center">
         <ons-button modifier="large" onclick="saveSpendData()" style="margin-top:10px;width:80%">確認</ons-button>
@@ -216,17 +186,12 @@
 
   </ons-page>
 </template>
-    <!-- -===========================PAGE3============================== -->
-    <!-- <template id="tab3.html">
-  <ons-page id="Tab3">  
-            
-  </ons-page>
-</template> -->
+
 
 <ons-modal direction="up">
   <div style="text-align: center">
     <p>
-      
+
       <ons-icon icon="md-spinner" size="28px" spin></ons-icon>読み込んでいます...
     </p>
   </div>
@@ -288,7 +253,7 @@
                         console.log("1");
                         //ここにDELETEと機能やUPDATE機能を書く予定
                     });
-                    let iconName = "md-face"; 
+                    let iconName = "md-face";
                     let labelName = "";
                     let leftDiv = document.createElement("div");
                     leftDiv.className = "left";
@@ -328,7 +293,7 @@
                     let rightDiv = document.createElement("div");
                     rightDiv.className = "right";
                     rightDiv.innerHTML = `${results[i].cost} 円`;
-                    
+
                     listItem.appendChild(leftDiv);
                     listItem.appendChild(centerDiv);
                     listItem.appendChild(rightDiv);
@@ -343,7 +308,7 @@
                 ons.notification.toast('リストを取得は失敗しました', {
                     timeout: 1000,animation: 'fall'
                 });
-            });          
+            });
         }
 
         function getSaveList() {
@@ -365,7 +330,7 @@
                     let listItem = document.createElement("ons-list-item");
                     listItem.setAttribute("tappable");
                     listItem.className = "item";
-                    let iconName = "md-face"; 
+                    let iconName = "md-face";
                     let labelName = "";
                     let leftDiv = document.createElement("div");
                     leftDiv.className = "left";
@@ -389,7 +354,7 @@
                         icon.setAttribute("icon",iconName);
                         icon.setAttribute("fixed-width");
                         leftDiv.appendChild(icon);
-                    //中間的 標題
+                    //中間標題
                     let centerDiv = document.createElement("div");
                     centerDiv.className = "center";
                     centerDiv.innerHTML = `${labelName}`;
@@ -401,11 +366,11 @@
                     let rightDiv = document.createElement("div");
                     rightDiv.className = "right";
                     rightDiv.innerHTML = `${results[i].cost} 円`;
-                    
+
                     listItem.appendChild(leftDiv);
                     listItem.appendChild(centerDiv);
                     listItem.appendChild(rightDiv);
-                    
+
                     if(date != newdate){
                      document.getElementById("list_save").appendChild(header);
                      newdate = date;
@@ -416,14 +381,14 @@
                 ons.notification.toast('リストを取得は失敗しました', {
                     timeout: 1000,animation: 'fall'
                 });
-            });          
+            });
         }
 
         function reList() {
             let list = document.getElementById("list");
             list.innerHTML = "";
         }
-        
+
         function reSaveList() {
             let list = document.getElementById("list_save");
             list.innerHTML = "";
