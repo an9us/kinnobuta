@@ -1,0 +1,517 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <!-- onsen UI -->
+    <script src="lib/onsenui/js/onsenui.min.js"></script>
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="loadPage()">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">支出</div>
+        </ons-toolbar>
+        <ons-tabbar swipeable position="auto">
+            <ons-tab page="tab1.html" label="支出" active>
+                <ons-icon icon="fa-coins"></ons-icon> </ons-tab>
+            <ons-tab page="tab2.html" label="収入">
+                <ons-icon icon="fa-piggy-bank"></ons-icon> </ons-tab>
+            <!-- <ons-tab page="tab3.html" label="設定">
+                <ons-icon icon="fa-cog"></ons-icon> </ons-tab> -->
+        </ons-tabbar>
+    </ons-page>
+    <!-- -===========================PAGE1============================== -->
+    <template id="tab1.html">
+    <ons-page id="Tab1">
+
+    <ons-card>
+    <ons-row>
+        <ons-col width="30%" class="left-title">金　額</ons-col>
+        <ons-col>
+        <ons-input id="cost" type="text" inputmode="decimal" placeholder="金額を入力" min="0" max="500"></ons-input>
+        </ons-col>
+    </ons-row>
+
+        <ons-row>
+        <ons-col width="30%" class="left-title">メモー</ons-col>
+        <ons-col>
+            <ons-input id="memo" type="text" placeholder="メモーを入力" min="0" max="500"></ons-input>
+        </ons-col>
+        </ons-row>
+
+    <ons-row>
+        <ons-col width="30%" class="left-title">日　付</ons-col>
+        <ons-col><input type="date" name="today" id="date"/></ons-col>
+    </ons-row>
+    <!-- RADIO BTN -->
+  
+<ons-row>
+<ons-carousel  auto-refresh swipeable overscrollable item-width="70px">
+<ons-carousel-item>
+          <label class="custom-radio-btn">
+            <input type="radio" name="category" value="0" checked>
+            <span class="checkmark">
+                <ons-icon icon="fa-utensils"></ons-icon><br>食事</span>
+        </label>
+ </ons-carousel-item>
+ <ons-carousel-item>
+           <label class="custom-radio-btn">
+            <input type="radio" name="category" value="1">
+            <span class="checkmark">
+                <ons-icon icon="fa-cocktail"></ons-icon><br>飲み物</span>
+        </label>
+ </ons-carousel-item>
+ <ons-carousel-item>
+     <label class="custom-radio-btn">
+     <input type="radio" name="category" value="2">
+        <span class="checkmark">
+            <ons-icon icon="fa-file-invoice-dollar"></ons-icon><br>生活</span>
+        </label>
+ </ons-carousel-item>
+  <ons-carousel-item>
+      <label class="custom-radio-btn">
+     <input type="radio" name="category" value="3">
+        <span class="checkmark">
+            <ons-icon icon="fa-calendar-alt"></ons-icon><br>活動</span>
+        </label>
+ </ons-carousel-item>
+  <ons-carousel-item>
+      <label class="custom-radio-btn">
+   <input type="radio" name="category" value="4">
+        <span class="checkmark">
+            <ons-icon icon="fa-bus"></ons-icon><br>交通</span>
+        </label>
+ </ons-carousel-item>
+<ons-carousel-item>
+      <label class="custom-radio-btn">
+   <input type="radio" name="category" value="5">
+        <span class="checkmark">
+            <ons-icon icon="fa-gamepad"></ons-icon><br>ゲーム</span>
+        </label>
+ </ons-carousel-item>
+ 
+</ons-carousel>
+</ons-row>
+
+<!-- 
+    <ons-row  class="flex-space">
+        <label class="custom-radio-btn">
+            <input type="radio" name="category" value="0" checked>
+            <span class="checkmark">
+                <ons-icon icon="fa-utensils"></ons-icon><br>食事</span>
+        </label>
+        <label class="custom-radio-btn">
+            <input type="radio" name="category" value="1">
+            <span class="checkmark">
+                <ons-icon icon="fa-cocktail"></ons-icon><br>飲み物</span>
+        </label>
+        <label class="custom-radio-btn">
+        <input type="radio" name="category" value="2">
+        <span class="checkmark">
+            <ons-icon icon="fa-file-invoice-dollar"></ons-icon><br>生活</span>
+        </label>
+        <label class="custom-radio-btn">
+        <input type="radio" name="category" value="3">
+        <span class="checkmark">
+            <ons-icon icon="fa-calendar-alt"></ons-icon><br>活動</span>
+        </label>
+        <label class="custom-radio-btn">
+        <input type="radio" name="category" value="4">
+        <span class="checkmark">
+            <ons-icon icon="fa-bus"></ons-icon><br>交通</span>
+        </label>
+    </ons-row> 
+-->
+
+    <ons-row class="flex-center">
+        <ons-button modifier="large" onclick="saveSpendData()" style="margin-top:10px;width:80%">確認</ons-button>
+    </ons-row>
+    </ons-card>
+    <!-- LIST -->
+    <ons-card id="listcard">
+    <div class="flex-center">
+        <div class="listbox">
+            <ons-list id ="list"></ons-list>
+        </div>
+    </div>
+    </ons-card>
+
+
+  </ons-page>
+</template>
+
+
+    <!-- -===========================收入============================== -->
+    <template id="tab2.html">
+   <ons-page id="Tab2">
+    <ons-card>
+    <ons-row>
+        <ons-col width="30%" class="left-title">金　額</ons-col>
+        <ons-col>
+        <ons-input id="cost_save" type="text" inputmode="decimal" placeholder="金額を入力" min="0" max="500"></ons-input>
+        </ons-col>
+    </ons-row>
+
+        <ons-row>
+        <ons-col width="30%" class="left-title">メモー</ons-col>
+        <ons-col>
+            <ons-input id="memo_save" type="text" placeholder="メモーを入力" min="0" max="500"></ons-input>
+        </ons-col>
+        </ons-row>
+
+    <ons-row>
+        <ons-col width="30%" class="left-title">日　付</ons-col>
+        <ons-col><input type="date" name="today" id="date_save"/></ons-col>
+    </ons-row>
+    <!-- RADIO BTN -->
+    <ons-row  class="flex-space">
+        <label class="custom-radio-btn">
+            <input type="radio" name="category_save" value="10" checked>
+            <span class="checkmark">
+            <ons-icon icon="fa-concierge-bell"></ons-icon><br>バイト</span>
+        </label>
+        <label class="custom-radio-btn">
+            <input type="radio" name="category_save" value="11">
+            <span class="checkmark">
+                <ons-icon icon="fa-home"></ons-icon><br>家族</span>
+        </label>
+        <label class="custom-radio-btn">
+        <input type="radio" name="category_save" value="12">
+        <span class="checkmark">
+            <ons-icon icon="fa-graduation-cap"></ons-icon><br>奨学金</span>
+        </label>
+         <label class="custom-radio-btn">
+        <input type="radio" name="category_save" value="13">
+        <span class="checkmark">
+            <ons-icon icon="fa-black-tie"></ons-icon><br>給料</span>
+        </label>
+        <label class="custom-radio-btn">
+        <input type="radio" name="category_save" value="14">
+        <span class="checkmark">
+            <ons-icon icon="fa-file-invoice-dollar"></ons-icon><br>その他</span>
+        </label>
+    </ons-row>
+
+    <ons-row class="flex-center">
+        <ons-button modifier="large" onclick="saveSaveData()" style="margin-top:10px;width:80%">確認</ons-button>
+    </ons-row>
+    </ons-card>
+    <!-- LIST -->
+    <ons-card id="listcard">
+    <div class="flex-center">
+        <div class="listbox">
+            <ons-list id ="list_save"></ons-list>
+        </div>
+    </div>
+    </ons-card>
+
+
+  </ons-page>
+</template>
+    <!-- -===========================PAGE3============================== -->
+    <!-- <template id="tab3.html">
+  <ons-page id="Tab3">  
+            
+  </ons-page>
+</template> -->
+
+<ons-modal direction="up">
+  <div style="text-align: center">
+    <p>
+      
+      <ons-icon icon="md-spinner" size="28px" spin></ons-icon>読み込んでいます...
+    </p>
+  </div>
+</ons-modal>
+
+    <script>
+        //データベース
+        const appKey = "98e281e1d46e2aa5b35ffbeb2db2439f9384705b9b72add4ab98841ee765baa1";
+        const clientKey = "27538d610c258ec020756efa2d73568b2b73ed6108c13973c78df6ba750bb99b";
+        const ncmb = new NCMB(appKey, clientKey);
+
+        ons.ready(function() {console.log("Onsen UI is ready!");});
+
+        if (ons.platform.isIPhoneX()) {
+            document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+            document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+        }
+        document.addEventListener('prechange', function(event) {
+            document.querySelector('ons-toolbar .center').innerHTML = event.tabItem.getAttribute('label');
+        });
+
+        function loadPage() {
+            showModal();
+            today();
+            getList();
+            getSaveList();
+        }
+        //今日の日付に変換する
+        function today() {
+            var today = new Date();
+            today.setDate(today.getDate());
+            var yyyy = today.getFullYear();
+            var mm = ("0" + (today.getMonth() + 1)).slice(-2);
+            var dd = ("0" + today.getDate()).slice(-2);
+            document.getElementById("date").value = yyyy + '-' + mm + '-' + dd;
+            document.getElementById("date_save").value = yyyy + '-' + mm + '-' + dd;
+        }
+
+        function getList() {
+            var spendMoney = ncmb.DataStore("spendMoney");
+            spendMoney.equalTo("type", "0").fetchAll()
+            .then(function(results) {
+                let len = results.length;
+                if (len == 0) {
+                    let noItem = document.createElement("h3");
+                    noItem.className = "flex-center";
+                    noItem.innerHTML = "記録がないですよね"
+                    document.getElementById("list").appendChild(noItem);
+                }
+                let newdate = "";
+                for(let i=len-1;i>=0;i--){
+                    let date = results[i].date;
+                    let header = document.createElement("ons-list-header");
+                    header.innerHTML = results[i].date;
+                    let listItem = document.createElement("ons-list-item");
+                    listItem.setAttribute("tappable");
+                    listItem.className = "item";
+                    listItem.addEventListener("click",()=>{
+                        console.log("1");
+                        //ここにDELETEと機能やUPDATE機能を書く予定
+                    });
+                    let iconName = "md-face"; 
+                    let labelName = "";
+                    let leftDiv = document.createElement("div");
+                    leftDiv.className = "left";
+                        let icon = document.createElement("ons-icon")
+                        if (results[i].category == "0") {
+                            iconName = "fa-utensils";
+                            labelName = "食事";
+                        } else if (results[i].category == "1") {
+                            iconName = "fa-cocktail";
+                            labelName = "飲み物";
+                        } else if (results[i].category == "2") {
+                            iconName = "fa-file-invoice-dollar";
+                            labelName = "生活";
+                        } else if (results[i].category == "3") {
+                            iconName = "fa-calendar-alt";
+                            labelName = "活動";
+                        } else if (results[i].category == "4") {
+                            iconName = "fa-bus";
+                            labelName = "交通";
+                        } else if (results[i].category == "5") {
+                            iconName = "fa-gamepad";
+                            labelName = "ゲーム";
+                        }
+
+                        icon.setAttribute("icon",iconName);
+                        icon.setAttribute("fixed-width");
+                        leftDiv.appendChild(icon);
+                    //中間的 標題
+                    let centerDiv = document.createElement("div");
+                    centerDiv.className = "center";
+                    centerDiv.innerHTML = `${labelName}`;
+                    let span = document.createElement("span");
+                    span.innerHTML=`(${results[i].memo})`;
+                    span.setAttribute("style","color:gray;font-size:small;padding-left:5px;");
+                    if(results[i].memo!=""){centerDiv.append(span);}
+
+                    let rightDiv = document.createElement("div");
+                    rightDiv.className = "right";
+                    rightDiv.innerHTML = `${results[i].cost} 円`;
+                    
+                    listItem.appendChild(leftDiv);
+                    listItem.appendChild(centerDiv);
+                    listItem.appendChild(rightDiv);
+
+                    if(date != newdate){
+                     document.getElementById("list").appendChild(header);
+                     newdate = date;
+                    }
+                    document.getElementById("list").appendChild(listItem);
+                }
+            }).catch(function(error) {
+                ons.notification.toast('リストを取得は失敗しました', {
+                    timeout: 1000,animation: 'fall'
+                });
+            });          
+        }
+
+        function getSaveList() {
+            var spendMoney = ncmb.DataStore("spendMoney");
+            spendMoney.equalTo("type", "1").fetchAll()
+            .then(function(results) {
+                let len = results.length;
+                if (len == 0) {
+                    let noItem = document.createElement("h3");
+                    noItem.className = "flex-center";
+                    noItem.innerHTML = "記録がないですよね"
+                    document.getElementById("list_save").appendChild(noItem);
+                }
+                let newdate = "";
+                for(let i=len-1;i>=0;i--){
+                    let date = results[i].date;
+                    let header = document.createElement("ons-list-header");
+                    header.innerHTML = results[i].date;
+                    let listItem = document.createElement("ons-list-item");
+                    listItem.setAttribute("tappable");
+                    listItem.className = "item";
+                    let iconName = "md-face"; 
+                    let labelName = "";
+                    let leftDiv = document.createElement("div");
+                    leftDiv.className = "left";
+                        let icon = document.createElement("ons-icon")
+                        if (results[i].category == "10") {
+                            iconName = "fa-concierge-bell";
+                            labelName = "バイト";
+                        } else if (results[i].category == "11") {
+                            iconName = "fa-home";
+                            labelName = "家族";
+                        } else if (results[i].category == "12") {
+                            iconName = "fa-graduation-cap";
+                            labelName = "奨学金";
+                        } else if (results[i].category == "13") {
+                            iconName = "fa-black-tie";
+                            labelName = "給料";
+                        } else if (results[i].category == "14") {
+                            iconName = "fa-file-invoice-dollar";
+                            labelName = "その他";
+                        }
+                        icon.setAttribute("icon",iconName);
+                        icon.setAttribute("fixed-width");
+                        leftDiv.appendChild(icon);
+                    //中間的 標題
+                    let centerDiv = document.createElement("div");
+                    centerDiv.className = "center";
+                    centerDiv.innerHTML = `${labelName}`;
+                    let span = document.createElement("span");
+                    span.innerHTML=`(${results[i].memo})`;
+                    span.setAttribute("style","color:gray;font-size:small;padding-left:5px;");
+                    if(results[i].memo!=""){centerDiv.append(span);}
+
+                    let rightDiv = document.createElement("div");
+                    rightDiv.className = "right";
+                    rightDiv.innerHTML = `${results[i].cost} 円`;
+                    
+                    listItem.appendChild(leftDiv);
+                    listItem.appendChild(centerDiv);
+                    listItem.appendChild(rightDiv);
+                    
+                    if(date != newdate){
+                     document.getElementById("list_save").appendChild(header);
+                     newdate = date;
+                    }
+                    document.getElementById("list_save").appendChild(listItem);
+                }
+             }).catch(function(error) {
+                ons.notification.toast('リストを取得は失敗しました', {
+                    timeout: 1000,animation: 'fall'
+                });
+            });          
+        }
+
+        function reList() {
+            let list = document.getElementById("list");
+            list.innerHTML = "";
+        }
+        
+        function reSaveList() {
+            let list = document.getElementById("list_save");
+            list.innerHTML = "";
+        }
+        //支出
+        function saveSpendData() {
+            let spendMoney = ncmb.DataStore("spendMoney");
+            let spendClass = new spendMoney();
+            let types = "0";
+            let category = "";
+            var radios = document.getElementsByName("category");
+            let len = radios.length;
+            for (let i = 0; i < len; i++) {
+                if (radios[i].checked == true) {
+                    category = radios[i].value
+                }
+            }
+            if (document.getElementById("cost").value == "") {
+                ons.notification.toast('金額を入力してください', {
+                    timeout: 1000,animation: 'fall'});
+            } else {
+                spendClass.set("type",types)
+                    .set("cost", document.getElementById("cost").value)
+                    .set("category", category)
+                    .set("date", document.getElementById("date").value)
+                    .set("memo", document.getElementById("memo").value)
+                    .save()
+                    .then(function(object) {
+                        ons.notification.toast('保存しました', {
+                            timeout: 1000,animation: 'fall'
+                        });
+                        reList();
+                        getList();
+                    })
+                    .catch(function(error) {
+                        ons.notification.toast('保存は失敗しました', {
+                            timeout: 1000, animation: 'fall'
+                        });
+                        console.log("err:" + error)
+                    });
+                document.getElementById("cost").value = "";
+                document.getElementById("memo").value = "";
+            }
+        }
+//收入
+        function saveSaveData(){
+            let spendMoney = ncmb.DataStore("spendMoney");
+            let spendClass = new spendMoney();
+            let types = "1"; //收入
+            let category = "";
+            var radios = document.getElementsByName("category_save");
+            let len = radios.length;
+            for (let i = 0; i < len; i++) {
+                if (radios[i].checked == true) {category = radios[i].value;}
+            }
+            if (document.getElementById("cost_save").value == "") {
+                ons.notification.toast('金額を入力してください', {
+                    timeout: 1000,animation: 'fall'});
+            } else {
+                  spendClass.set("type",types)
+                    .set("cost", document.getElementById("cost_save").value)
+                    .set("category", category)
+                    .set("date", document.getElementById("date_save").value)
+                    .set("memo", document.getElementById("memo_save").value)
+                    .save()
+                    .then(function(object) {
+                        ons.notification.toast('保存しました', {
+                            timeout: 1000,animation: 'fall'  });
+                            reSaveList();
+                            getSaveList();
+                    })
+                    .catch(function(error) {
+                        ons.notification.toast('保存は失敗しました', {
+                            timeout: 1000, animation: 'fall'
+                        });
+                        console.log("err:" + error)
+                    });
+                    document.getElementById("cost_save").value = "";
+                    document.getElementById("memo_save").value = "";
+            }
+        }
+
+        function showModal() {
+            var modal = document.querySelector('ons-modal');
+            modal.show();
+            setTimeout(function() {modal.hide();}, 1000);
+        }
+    </script>
+</body>
+
+</html>
