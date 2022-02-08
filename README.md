@@ -1,6 +1,10 @@
 # kinnobuta
 monacaとニフクラ mobile backendを連携して、作った簡単な家計簿です
 
+#### プレビュー
+
+![金の豚のアプリ-プレビュー](https://an9us.github.io/img/01.gif)
+
 
 MonacaというWeb IDEで作ったWebアプリです。
 OnsenUIを利用して、ニフクラNIFCLOUDというデータベースを連携しています。
